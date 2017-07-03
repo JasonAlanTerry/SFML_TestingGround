@@ -9,20 +9,20 @@ private:
 	const uint16_t WIDTH	= 1280;
 	const uint16_t HEIGHT	= 720;	
 
+	sf::RenderWindow window;
+
 	void handleEvent(const sf::Event& e);
 
 public:
 
 	Display() {};
 
-	sf::RenderWindow window;
-
 	// init the window
 	void init(const std::string& name = "Window");
-
-	void update();
-	void clear(const sf::Color& colour = { 0, 0, 0 });
+		
+	void clear();
 	void draw(const sf::Drawable& drawable);
+	void render();
 
 	bool isOpen();
 	void pollEvents();

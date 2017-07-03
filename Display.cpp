@@ -14,12 +14,12 @@ bool Display::isOpen() {
 	return window.isOpen();
 }
 
-void Display::update() {
+void Display::render() {
 	window.display();
 }
 
-void Display::clear(const sf::Color& colour) {
-	window.clear(colour);
+void Display::clear() {
+	window.clear(sf::Color::Black);
 }
 
 
