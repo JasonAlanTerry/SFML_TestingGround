@@ -20,12 +20,6 @@ namespace State {
 		Exit
 	};
 
-	struct ResReq {
-		std::vector<std::string> textures;
-		std::vector<std::string> fonts;
-		std::vector<std::string> sounds;
-	};
-
 	struct Scene {
 		std::vector<sf::Sprite> sprites;
 		std::vector<sf::Text> text;

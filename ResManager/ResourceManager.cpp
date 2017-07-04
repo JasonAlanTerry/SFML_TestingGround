@@ -1,5 +1,6 @@
 #include "ResourceManager.h"
 #include <iostream>
+#include <string.h>
 
 namespace ResCodex {
 
@@ -14,10 +15,10 @@ namespace ResCodex {
 	}
 
 	// TODO-- extract DRY code
-	void ResourceManager::handleStateRequest(State::ResReq req) {
+	void ResourceManager::handleStateRequest(ResReq req) {
 
 		sf::Clock c;
-		float dt;
+		float dt = 0.0;
 
 		std::clog << "Loading Textures" << std::endl;
 		for (auto i : req.textures) {
@@ -47,15 +48,30 @@ namespace ResCodex {
 
 	// load res to mem
 	void ResourceManager::loadTextureResource(std::string path) {
+		std::vector<std::string> tokens;
+		tokenizePath(path, tokens);
 
+		std::string key = tokens[1] + "_" + tokens[tokens.size() - 2];
+
+		sf::Texture t;
+		t.loadFromFile(path);
+		textures.insert(std::make_pair(key, t));
 	}
 
 	void ResourceManager::loadFontResource(std::string path) {
+		std::vector<std::string> tokens;
+		tokenizePath(path, tokens);
 
+		std::string key = tokens[1] + "_" + tokens[tokens.size() - 2];
+
+		sf::Font f;
+		f.loadFromFile(path);
+		fonts.insert(std::make_pair(key, f));
 	}
 
+	// todo --
 	void ResourceManager::loadSoundResource(std::string path) {
-
+		
 	}
 
 	// delete res from mem
@@ -72,15 +88,35 @@ namespace ResCodex {
 	}
 
 	// getters
-	sf::Texture ResourceManager::getTextureResource(std::string id) {
-
+	const sf::Texture& ResourceManager::getTextureResource(const std::string& id) {
+		return textures.at(id);
 	}
 
-	sf::Font ResourceManager::getFontResource(std::string id) {
-	
+	const sf::Font& ResourceManager::getFontResource(const std::string& id) {
+		return fonts.at(id);
 	}
 
 	sf::Sound ResourceManager::getSoundResource(std::string id) {
+		return sounds.at(id);
+	}
 
+	void ResourceManager::tokenizePath(const std::string& path, std::vector<std::string>& tokens) {
+
+		std::string delimiters = "/_.";
+
+		// Skip delimiters at beginning.
+		std::string::size_type lastPos = path.find_first_not_of(delimiters, 0);
+		// Find first "non-delimiter".
+		std::string::size_type pos = path.find_first_of(delimiters, lastPos);
+
+		while (std::string::npos != pos || std::string::npos != lastPos)
+		{
+			// Found a token, add it to the vector.
+			tokens.push_back(path.substr(lastPos, pos - lastPos));
+			// Skip delimiters.  Note the "not_of"
+			lastPos = path.find_first_not_of(delimiters, pos);
+			// Find next "non-delimiter"
+			pos = path.find_first_of(delimiters, lastPos);
+		}
 	}
 }

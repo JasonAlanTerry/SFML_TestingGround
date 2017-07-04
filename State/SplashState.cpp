@@ -8,15 +8,17 @@ namespace State {
 		: BaseState(app)
 	{
 
-		// let's list all the resources we plan to use in this state
-		req.textures.push_back("spl/tex_splsfml.png");
-		req.fonts.push_back("fnt_Akashi.ttf");
-
 	}
 
 	void SplashState::setup() {
 
 		Scene splash;
+
+		// let's list all the resources we plan to use in this state
+		req.textures.push_back("tex_splsfml.png");
+		req.fonts.push_back("fnt_Akashi.ttf");
+
+		resManager.handleStateRequest(req);
 
 		// list all the game objects here
 		// todo -- Game objects should be abstracted a bit more

@@ -16,12 +16,11 @@ Application::Application() {
 	display.init();
 	Random::init();
 
-	// set init state
-	pushState(std::make_unique<State::SplashState>(*this));
-
 }
 
 int Application::runMainLoop() {
+
+	//pushState(std::make_unique<State::SplashState>(*this));
 
 	sf::Clock c;
 
@@ -50,11 +49,13 @@ int Application::runMainLoop() {
 		calculateFPS();
 
 		display.clear();
-
+		
+		/*
 		m_states.top()->input();
 		m_states.top()->update(dt);
 		m_states.top()->draw();
-		
+		*/
+
 		// draw debug
 		debugLFT.setString(getLastFrameTime(dt));
 		debugFPS.setString(getFPS());
@@ -64,20 +65,20 @@ int Application::runMainLoop() {
 
 		// display scene
 		display.render();
-		display.pollEvents(*m_states.top());
+		// display.pollEvents(*m_states.top());
 	}
 
 	return 0;
 }
 
 void Application::pushState(std::unique_ptr<State::BaseState> state) {
-	m_states.push(std::move(state));
-	m_states.top()->setup();
+	//m_states.push(std::move(state));
+	//m_states.top()->setup();
 }
 
 void Application::popState() {
-	m_states.top()->kill();
-	m_states.pop();
+	//m_states.top()->kill();
+	//m_states.pop();
 }
 
 // debug bs

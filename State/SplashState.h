@@ -13,7 +13,7 @@ namespace State {
 
 	private:
 		Status currentStatus;
-		ResReq req;
+		ResCodex::ResReq req;
 
 	public:
 

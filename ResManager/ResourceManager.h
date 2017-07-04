@@ -4,12 +4,16 @@
 #include "SFML\Graphics.hpp"
 #include "SFML\Audio.hpp"
 
-#include "..\State\BaseState.h"
-
 #include <memory>
 #include <unordered_map>
 
 namespace ResCodex {	
+	
+	struct ResReq {
+		std::vector<std::string> textures;
+		std::vector<std::string> fonts;
+		std::vector<std::string> sounds;
+	};
 
 	class ResourceManager {
 	private:
@@ -28,7 +32,8 @@ namespace ResCodex {
 		~ResourceManager();
 
 		// todo extact to manager?
-		void handleStateRequest(State::ResReq req);
+		void handleStateRequest(ResReq req);
+		void tokenizePath(const std::string& path, std::vector<std::string>& tokens);
 
 		// loaders
 		void loadTextureResource(std::string path);
@@ -41,8 +46,8 @@ namespace ResCodex {
 		void purgeSoundResource(std::string id);
 
 		// getters
-		sf::Texture getTextureResource(std::string id);
-		sf::Font getFontResource(std::string id);
+		const sf::Texture& getTextureResource(const std::string& id);
+		const sf::Font& getFontResource(const std::string& id);
 		sf::Sound getSoundResource(std::string id);
 
 	};
