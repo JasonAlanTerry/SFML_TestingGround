@@ -7,6 +7,13 @@ class Application;
 
 namespace State {
 
+	enum class Status {
+		Init,
+		Active,
+		Hold,
+		Exit
+	};
+
 	class BaseState
 	{
 	public:
