@@ -150,14 +150,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="include\State\BaseState.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Random.cpp" />
+    <ClCompile Include="include\Util\Random.cpp" />
+    <ClCompile Include="include\State\SplashState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="include\State\BaseState.h" />
     <ClInclude Include="Display.h" />
-    <ClInclude Include="Random.h" />
+    <ClInclude Include="include\Util\Random.h" />
+    <ClInclude Include="include\State\SplashState.h" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="res\Akashi.ttf" />
