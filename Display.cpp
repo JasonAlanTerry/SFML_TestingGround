@@ -1,4 +1,7 @@
 #include "Display.h"
+#include "Include/State/BaseState.h"
+
+
 
 void Display::handleEvent(const sf::Event& e) {
 	if (e.type == sf::Event::Closed) {
@@ -27,10 +30,11 @@ void Display::draw(const sf::Drawable& drawable) {
 	window.draw(drawable);
 }
 
-void Display::pollEvents() {
+void Display::pollEvents(State::BaseState& gameState) {
 	sf::Event e;
 	while (window.pollEvent(e))
 	{
 		handleEvent(e);
+		gameState.input(e);
 	}
 }

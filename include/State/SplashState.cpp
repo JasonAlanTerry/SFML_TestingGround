@@ -10,6 +10,10 @@ namespace State {
 
 	}
 
+	void SplashState::input(const sf::Event& e) {
+
+	}
+
 	void SplashState::input() {
 	
 	}

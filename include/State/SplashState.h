@@ -1,4 +1,6 @@
-#pragma once
+#ifndef _SPLASHSTATE
+#define _SPLASHSTATE
+
 
 #include <SFML\Graphics.hpp>
 #include <SFML\Audio.hpp>
@@ -14,6 +16,7 @@ namespace State {
 		SplashState(Application& app);
 		~SplashState() {}
 
+		void input(const sf::Event& e);
 		void input();
 		void update(float dt);
 		void draw();
@@ -22,3 +25,4 @@ namespace State {
 
 }
 
+#endif

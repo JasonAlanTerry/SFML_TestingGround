@@ -1,73 +1,109 @@
 #include "Application.h"
+
+#include "include\Util\Random.h"
+
+#include "include\State\SplashState.h"
+
 #include <sstream>
-#include <iostream>
-#include <vector>
+
+
+sf::Clock Application::timer;
+sf::Clock Application::printTimer;
 
 Application::Application() {
 
 	display.init();
-	
+	Random::init();
+
+	// set init state
+	pushState(std::make_unique<State::SplashState>(*this));
+
 }
 
 int Application::runMainLoop() {
-
 
 	sf::Clock c;
 
 	sf::Font font;
 	if (!font.loadFromFile("res/Monaco.ttf")) {
-		std::cout << "We fucked up" << std::endl;
-	}
-	else {
-		std::cout << "Loading font" << std::endl;
+		// error
 	}
 
+	// todo-- Move to debug-class
+	sf::Text debugLFT;
+	sf::Text debugFPS;
 
-	sf::Text lft;
-	sf::Text fps;	
+	debugLFT.setFont(font);
+	debugLFT.setCharacterSize(12);
+	debugLFT.setFillColor(sf::Color(0, 255, 0, 125));
+	debugFPS.setFont(font);
+	debugFPS.setCharacterSize(12);
+	debugFPS.setFillColor(sf::Color(0, 255, 0, 125));
 
-	lft.setFont(font);
-	lft.setCharacterSize(22);
-	lft.setFillColor(sf::Color(0, 255, 0, 125));
-	fps.setFont(font);
-	fps.setCharacterSize(22);
-	fps.setFillColor(sf::Color(0, 255, 0, 125));
-	
-
-	lft.setPosition(0.0f, 0.0f);
-	fps.setPosition(0.0f, 25.0f);
+	debugLFT.setPosition(0.0f, 0.0f);
+	debugFPS.setPosition(0.0f, 12.0f);
 
 	while (display.isOpen()) {
 
 		auto dt = c.restart().asSeconds();
+		calculateFPS();
 
-		// clear
 		display.clear();
 
-		// input
-		// update
-		// draw
+		m_states.top()->input();
+		m_states.top()->update(dt);
+		m_states.top()->draw();
+		
+		// draw debug
+		debugLFT.setString(getLastFrameTime(dt));
+		debugFPS.setString(getFPS());
 
-		std::stringstream ss;
-		ss << "[ LF:" << dt << "ms ]";
-		std::string lftstr = ss.str();
-		std::cout << lftstr << std::endl;
-		lft.setString(lftstr);
-		ss.str(std::string());
-
-		ss << "[ FPS:" << 0.0f << "]";
-		std::string fpsstr = ss.str();		
-		std::cout << fpsstr << std::endl;
-		fps.setString(fpsstr);
-		ss.str(std::string());
-				
-		display.draw(lft);
-		display.draw(fps);
+		display.draw(debugLFT);
+		display.draw(debugFPS);
 
 		// display
 		display.render();
-		display.pollEvents();
+		display.pollEvents(*m_states.top());
 	}
 
 	return 0;
+}
+
+void Application::pushState(std::unique_ptr<State::BaseState> state) {
+	m_states.push(std::move(state));
+}
+
+void Application::popState() {
+	m_states.pop();
+}
+
+// debug bs
+
+void Application::calculateFPS()
+{
+	totalFrames++;
+	if (printTimer.getElapsedTime().asSeconds() >= 1.0f)
+	{
+		fps = (float)totalFrames / timer.getElapsedTime().asSeconds();
+		printTimer.restart();
+		totalFrames = 0;
+		timer.restart();
+	}
+}
+
+std::string Application::getFPS()
+{
+	std::stringstream ss;
+	ss << "FPS:" << fps;
+	std::string fpsstr = ss.str();
+	return fpsstr;
+
+}
+
+std::string Application::getLastFrameTime(float dt)
+{
+	std::stringstream ss;
+	ss << "LFT:" << dt << "ms";
+	std::string lftstr = ss.str();
+	return lftstr;
 }
