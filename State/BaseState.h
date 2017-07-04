@@ -3,6 +3,8 @@
 
 #include <SFML\Graphics.hpp>
 
+#include <vector>
+
 class Application;
 
 namespace State {
@@ -12,6 +14,12 @@ namespace State {
 		Active,
 		Hold,
 		Exit
+	};
+
+	struct ResReq {
+		std::vector<std::string> textures;
+		std::vector<std::string> fonts;
+		std::vector<std::string> sounds;
 	};
 
 	class BaseState

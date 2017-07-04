@@ -1,5 +1,5 @@
-#ifndef _SPLASHSTATE
-#define _SPLASHSTATE
+#ifndef _PLAYSTATE
+#define _PLAYSTATE
 
 
 #include <SFML\Graphics.hpp>
@@ -9,16 +9,12 @@
 
 namespace State {
 
-	class SplashState : public BaseState {
-
-	private:
-		Status currentStatus;
-		ResReq req;
+	class PlayState : public BaseState {
 
 	public:
 
-		SplashState(Application& app);
-		~SplashState() {}
+		PlayState(Application& app);
+		~PlayState() {}
 
 		void input(const sf::Event& e);
 		void input();

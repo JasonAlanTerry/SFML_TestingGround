@@ -150,6 +150,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
+    <ClCompile Include="State\PlayState.cpp" />
     <ClCompile Include="ResManager\ResourceHolder.cpp" />
     <ClCompile Include="ResManager\ResourceManager.cpp" />
     <ClCompile Include="State\BaseState.cpp" />
@@ -160,6 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
+    <ClInclude Include="State\PlayState.h" />
     <ClInclude Include="ResManager\ResourceHolder.h" />
     <ClInclude Include="ResManager\ResourceManager.h" />
     <ClInclude Include="State\BaseState.h" />
