@@ -33,13 +33,10 @@
     <ClCompile Include="Util\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ResManager\ResourceHolder.cpp">
+    <ClCompile Include="State\PlayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ResManager\ResourceManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="State\PlayState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,13 +56,10 @@
     <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ResManager\ResourceHolder.h">
+    <ClInclude Include="State\PlayState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ResManager\ResourceManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="State\PlayState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

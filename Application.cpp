@@ -5,6 +5,7 @@
 #include "State\SplashState.h"
 
 #include <sstream>
+#include <cmath>
 
 
 sf::Clock Application::timer;
@@ -25,7 +26,7 @@ int Application::runMainLoop() {
 	sf::Clock c;
 
 	sf::Font font;
-	if (!font.loadFromFile("res/font/Monaco.ttf")) {
+	if (!font.loadFromFile("res/font/fnt_Monaco.ttf")) {
 		// error
 	}
 
@@ -61,7 +62,7 @@ int Application::runMainLoop() {
 		display.draw(debugLFT);
 		display.draw(debugFPS);
 
-		// display
+		// display scene
 		display.render();
 		display.pollEvents(*m_states.top());
 	}
@@ -71,9 +72,11 @@ int Application::runMainLoop() {
 
 void Application::pushState(std::unique_ptr<State::BaseState> state) {
 	m_states.push(std::move(state));
+	m_states.top()->setup();
 }
 
 void Application::popState() {
+	m_states.top()->kill();
 	m_states.pop();
 }
 
@@ -84,7 +87,7 @@ void Application::calculateFPS()
 	totalFrames++;
 	if (printTimer.getElapsedTime().asSeconds() >= 1.0f)
 	{
-		fps = (float)totalFrames / timer.getElapsedTime().asSeconds();
+		fps = std::floor(totalFrames) / timer.getElapsedTime().asSeconds();
 		printTimer.restart();
 		totalFrames = 0;
 		timer.restart();

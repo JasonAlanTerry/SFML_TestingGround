@@ -9,4 +9,6 @@ namespace State {
 
 	}
 
+	static ResCodex::ResourceManager resManager;
+
 }

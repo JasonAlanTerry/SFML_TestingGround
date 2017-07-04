@@ -20,6 +20,13 @@ namespace State {
 		SplashState(Application& app);
 		~SplashState() {}
 
+		// build any drawables here
+		void setup();
+		void kill();
+
+		virtual void newScene(Scene s);
+		virtual void killScene();
+
 		void input(const sf::Event& e);
 		void input();
 		void update(float dt);
