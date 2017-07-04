@@ -4,8 +4,6 @@
 
 namespace State {
 
-
-
 	SplashState::SplashState(Application& app)
 		: BaseState(app)
 	{
