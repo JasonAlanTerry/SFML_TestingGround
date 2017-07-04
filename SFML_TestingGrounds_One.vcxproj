@@ -150,21 +150,26 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Application.cpp" />
-    <ClCompile Include="include\State\BaseState.cpp" />
+    <ClCompile Include="State\BaseState.cpp" />
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="include\Util\Random.cpp" />
-    <ClCompile Include="include\State\SplashState.cpp" />
+    <ClCompile Include="Util\Random.cpp" />
+    <ClCompile Include="State\SplashState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
-    <ClInclude Include="include\State\BaseState.h" />
+    <ClInclude Include="State\BaseState.h" />
     <ClInclude Include="Display.h" />
-    <ClInclude Include="include\Util\Random.h" />
-    <ClInclude Include="include\State\SplashState.h" />
+    <ClInclude Include="Util\Random.h" />
+    <ClInclude Include="State\SplashState.h" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="res\Akashi.ttf" />
+    <Font Include="res\font\Akashi.ttf" />
+    <Font Include="res\font\ClaCon.ttf" />
+    <Font Include="res\font\Monaco.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\tex\spl\SFMLSplash.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,7 +4,7 @@
 #include <cstdint>
 #include <SFML\Graphics.hpp>
 
-#include "include\State\BaseState.h"
+#include "State\BaseState.h"
 
 class Display {
 

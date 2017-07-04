@@ -24,34 +24,41 @@
     <ClCompile Include="Display.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\State\BaseState.cpp">
+    <ClCompile Include="State\BaseState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Util\Random.cpp">
+    <ClCompile Include="State\SplashState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\State\SplashState.cpp">
+    <ClCompile Include="Util\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Application.h">
+    <ClInclude Include="State\BaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State\SplashState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Util\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Display.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\State\BaseState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\Util\Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\State\SplashState.h">
+    <ClInclude Include="Application.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="res\Akashi.ttf" />
+    <Font Include="res\font\Akashi.ttf" />
+    <Font Include="res\font\ClaCon.ttf" />
+    <Font Include="res\font\Monaco.TTF" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\tex\spl\SFMLSplash.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>

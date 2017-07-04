@@ -1,8 +1,8 @@
 #include "Application.h"
 
-#include "include\Util\Random.h"
+#include "Util\Random.h"
 
-#include "include\State\SplashState.h"
+#include "State\SplashState.h"
 
 #include <sstream>
 
@@ -25,7 +25,7 @@ int Application::runMainLoop() {
 	sf::Clock c;
 
 	sf::Font font;
-	if (!font.loadFromFile("res/Monaco.ttf")) {
+	if (!font.loadFromFile("res/font/Monaco.ttf")) {
 		// error
 	}
 

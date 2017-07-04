@@ -1,6 +1,6 @@
 #include "SplashState.h"
-#include "../../Display.h"
-#include "../../Application.h"
+#include "../Display.h"
+#include "../Application.h"
 
 namespace State {
 
