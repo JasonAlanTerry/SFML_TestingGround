@@ -24,6 +24,7 @@ public:
 	void init(const std::string& name = "Window");
 
 	void clear();
+	void draw(const State::Scene& scene);
 	void draw(const sf::Drawable& drawable);
 	void render();
 

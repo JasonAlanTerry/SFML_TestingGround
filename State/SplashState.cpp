@@ -2,8 +2,10 @@
 #include "../Display.h"
 #include "../Application.h"
 
-namespace State {
 
+
+namespace State {
+	
 	SplashState::SplashState(Application& app)
 		: BaseState(app)
 	{
@@ -16,7 +18,7 @@ namespace State {
 
 		// let's list all the resources we plan to use in this state
 		req.textures.push_back("tex_splsfml.png");
-		req.fonts.push_back("fnt_Akashi.ttf");
+		req.fonts.push_back("font_Akashi.ttf");
 
 		resManager.handleStateRequest(req);
 
@@ -25,11 +27,17 @@ namespace State {
 		sf::Sprite logo;
 		sf::Text title;
 
-		title.setFont(resManager.getFontResource("fnt_Akashi"));
+		title.setFont(resManager.getFontResource("font_Akashi"));
 		title.setCharacterSize(64);
 		title.setFillColor(sf::Color(0, 255, 0, 125));
 		title.setOrigin(0.5f, 0.5f);
-		title.setPosition(0.5f, 0.5f);
+		title.setPosition(1280 / 2, 720 - 65);
+		title.setString("Game Engine Test");
+
+		logo.setTexture(resManager.getTextureResource("tex_splsfml"));
+		logo.scale(0.75f, 0.75f);
+		logo.setOrigin(logo.getTexture()->getSize().x/2, logo.getTexture()->getSize().y / 2);
+		logo.setPosition(1280 / 2, 720 / 2);
 
 		splash.sprites.push_back(logo);
 		splash.text.push_back(title);
@@ -38,11 +46,14 @@ namespace State {
 	}
 
 	void SplashState::kill() {
-
 	}
 
 	void SplashState::newScene(Scene s) {
 		this->sceneStack.push(s);
+	}
+
+	Scene SplashState::activeScene() {
+		return sceneStack.top();
 	}
 
 	void SplashState::killScene() {
@@ -61,8 +72,8 @@ namespace State {
 
 	}
 
-	void SplashState::draw() {
-	
+	std::string SplashState::stateInfo() {
+		return "Splash State";
 	}
 
 }

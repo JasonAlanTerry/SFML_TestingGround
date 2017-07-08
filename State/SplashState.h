@@ -24,13 +24,15 @@ namespace State {
 		void setup();
 		void kill();
 
-		virtual void newScene(Scene s);
-		virtual void killScene();
+		void newScene(Scene s);
+		Scene activeScene();		
+		void killScene();
 
 		void input(const sf::Event& e);
 		void input();
 		void update(float dt);
-		void draw();
+
+		std::string stateInfo();
 
 	};
 

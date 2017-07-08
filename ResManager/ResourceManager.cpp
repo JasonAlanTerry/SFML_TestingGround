@@ -47,7 +47,7 @@ namespace ResCodex {
 	}
 
 	// load res to mem
-	void ResourceManager::loadTextureResource(std::string path) {
+	void ResourceManager::loadTextureResource(std::string& path) {
 		std::vector<std::string> tokens;
 		tokenizePath(path, tokens);
 
@@ -58,7 +58,7 @@ namespace ResCodex {
 		textures.insert(std::make_pair(key, t));
 	}
 
-	void ResourceManager::loadFontResource(std::string path) {
+	void ResourceManager::loadFontResource(std::string& path) {
 		std::vector<std::string> tokens;
 		tokenizePath(path, tokens);
 
@@ -70,29 +70,45 @@ namespace ResCodex {
 	}
 
 	// todo --
-	void ResourceManager::loadSoundResource(std::string path) {
+	void ResourceManager::loadSoundResource(std::string& path) {
 		
 	}
 
 	// delete res from mem
-	void ResourceManager::purgeTextureResource(std::string id) {
+	void ResourceManager::purgeTextureResource(std::string& id) {
 
 	}
 
-	void ResourceManager::purgeFontResource(std::string id) {
+	void ResourceManager::purgeFontResource(std::string& id) {
 
 	}
 
-	void ResourceManager::purgeSoundResource(std::string id) {
+	void ResourceManager::purgeSoundResource(std::string& id) {
 
 	}
 
 	// getters
 	const sf::Texture& ResourceManager::getTextureResource(const std::string& id) {
+		auto search = textures.find(id);
+		if (search != textures.end()) {
+			std::cout << "Found " << search->first << "\n" << std::endl;
+			return textures.at(id);
+		}
+		else {
+			std::cout << "Not found\n";
+		}
 		return textures.at(id);
 	}
 
 	const sf::Font& ResourceManager::getFontResource(const std::string& id) {
+		auto search = fonts.find(id);
+		if (search != fonts.end()) {
+			std::cout << "Found " << search->first << " " << search->second.getInfo().family << '\n';
+			return fonts.at(id);
+		}
+		else {
+			std::cout << "Not found\n";
+		}
 		return fonts.at(id);
 	}
 

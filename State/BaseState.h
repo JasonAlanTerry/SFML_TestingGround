@@ -35,13 +35,15 @@ namespace State {
 		virtual void setup()					= 0;
 		virtual void kill()						= 0;
 
-		virtual void newScene(Scene s)					= 0;
+		virtual void newScene(Scene s)			= 0;
+		virtual Scene activeScene()			= 0;
 		virtual void killScene()				= 0;
 
 		virtual void input(const sf::Event& e)	= 0;
 		virtual void input()					= 0;
 		virtual void update(float dt)			= 0;
-		virtual void draw()						= 0;
+
+		virtual std::string stateInfo()			= 0;
 		
 
 	protected:

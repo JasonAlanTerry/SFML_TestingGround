@@ -8,8 +8,8 @@
 #include <cmath>
 
 
-sf::Clock Application::timer;
-sf::Clock Application::printTimer;
+sf::Clock Application::m_timer;
+sf::Clock Application::m_printTimer;
 
 Application::Application() {
 
@@ -20,94 +20,93 @@ Application::Application() {
 
 int Application::runMainLoop() {
 
-	//pushState(std::make_unique<State::SplashState>(*this));
+	pushState(std::make_unique<State::SplashState>(*this));
 
 	sf::Clock c;
-
 	sf::Font font;
-	if (!font.loadFromFile("res/font/fnt_Monaco.ttf")) {
+	if (!font.loadFromFile("res/font/font_Monaco.ttf")) {
 		// error
 	}
 
 	// todo-- Move to debug-class
-	sf::Text debugLFT;
-	sf::Text debugFPS;
+	sf::Text debug;
 
-	debugLFT.setFont(font);
-	debugLFT.setCharacterSize(12);
-	debugLFT.setFillColor(sf::Color(0, 255, 0, 125));
-	debugFPS.setFont(font);
-	debugFPS.setCharacterSize(12);
-	debugFPS.setFillColor(sf::Color(0, 255, 0, 125));
+	debug.setFont(font);
+	debug.setCharacterSize(12);
+	debug.setFillColor(sf::Color(0, 255, 0, 125));
 
-	debugLFT.setPosition(0.0f, 0.0f);
-	debugFPS.setPosition(0.0f, 12.0f);
+	debug.setPosition(0.0f, 0.0f);
 
 	while (display.isOpen()) {
 
-		auto dt = c.restart().asSeconds();
+		m_dt = c.restart().asSeconds();
 		calculateFPS();
 
-		display.clear();
+		display.clear();		
 		
-		/*
 		m_states.top()->input();
-		m_states.top()->update(dt);
-		m_states.top()->draw();
-		*/
+		m_states.top()->update(m_dt);
+		display.draw(m_states.top()->activeScene());
+		display.draw(debug);
+		
 
 		// draw debug
-		debugLFT.setString(getLastFrameTime(dt));
-		debugFPS.setString(getFPS());
-
-		display.draw(debugLFT);
-		display.draw(debugFPS);
+		debug.setString(debugOutput());
 
 		// display scene
 		display.render();
-		// display.pollEvents(*m_states.top());
+		display.pollEvents(*m_states.top());
 	}
 
 	return 0;
 }
 
 void Application::pushState(std::unique_ptr<State::BaseState> state) {
-	//m_states.push(std::move(state));
-	//m_states.top()->setup();
+	m_states.push(std::move(state));
+	m_states.top()->setup();
 }
 
 void Application::popState() {
-	//m_states.top()->kill();
-	//m_states.pop();
+	m_states.top()->kill();
+	m_states.pop();
 }
 
 // debug bs
-
-void Application::calculateFPS()
-{
-	totalFrames++;
-	if (printTimer.getElapsedTime().asSeconds() >= 1.0f)
-	{
-		fps = std::floor(totalFrames) / timer.getElapsedTime().asSeconds();
-		printTimer.restart();
-		totalFrames = 0;
-		timer.restart();
+void Application::calculateFPS() {
+	m_totalFrames++;
+	if (m_printTimer.getElapsedTime().asSeconds() >= 1.0f) {
+		m_fps = std::floor(m_totalFrames) / m_timer.getElapsedTime().asSeconds();
+		m_printTimer.restart();
+		m_totalFrames = 0;
+		m_timer.restart();
 	}
 }
 
-std::string Application::getFPS()
-{
+std::string Application::getFPS() {
 	std::stringstream ss;
-	ss << "FPS:" << fps;
-	std::string fpsstr = ss.str();
-	return fpsstr;
+	ss << "FPS:" << m_fps << "\n";
+	std::string str = ss.str();
+	return str;
 
 }
 
-std::string Application::getLastFrameTime(float dt)
-{
+std::string Application::getLastFrameTime() {
 	std::stringstream ss;
-	ss << "LFT:" << dt << "ms";
-	std::string lftstr = ss.str();
-	return lftstr;
+	ss << "LFT:" << m_dt << "ms \n";
+	std::string str = ss.str();
+	return str;
+}
+
+std::string Application::getActiveStateInfo() {
+	std::stringstream ss;
+	ss << "STATE:" << m_states.top()->stateInfo() << "\n";
+	std::string str = ss.str();
+	return str;
+}
+
+std::string Application::debugOutput() {
+	std::stringstream ss;
+	ss << getActiveStateInfo() << getFPS() << getLastFrameTime();
+	std::string str = ss.str();
+	return str;
 }

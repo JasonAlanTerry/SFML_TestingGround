@@ -16,15 +16,18 @@ private:
 	Display display;
 
 	// debug preformance
-	static sf::Clock timer;
-	static sf::Clock printTimer;
+	static sf::Clock m_timer;
+	static sf::Clock m_printTimer;
 
-	uint32_t fps			= 0;
-	long int totalFrames	= 0;
+	uint32_t m_fps			= 0;
+	float m_dt				= 0;
+	long int m_totalFrames	= 0;
 
 	void calculateFPS();
 	std::string getFPS();
-	std::string getLastFrameTime(float dt);
+	std::string getLastFrameTime();
+	std::string getActiveStateInfo();
+	std::string debugOutput();
 
 public:
 

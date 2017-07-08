@@ -5,7 +5,7 @@
 #include "SFML\Audio.hpp"
 
 #include <memory>
-#include <unordered_map>
+#include <map>
 
 namespace ResCodex {	
 	
@@ -22,9 +22,9 @@ namespace ResCodex {
 		const std::string audioPath = "res/snd/";
 		const std::string fontPath = "res/font/";
 
-		std::unordered_map<std::string, sf::Texture> textures;
-		std::unordered_map<std::string, sf::Font> fonts;
-		std::unordered_map<std::string, sf::Sound> sounds;
+		std::map<std::string, sf::Texture> textures;
+		std::map<std::string, sf::Font> fonts;
+		std::map<std::string, sf::Sound> sounds;
 
 	public:
 
@@ -36,14 +36,14 @@ namespace ResCodex {
 		void tokenizePath(const std::string& path, std::vector<std::string>& tokens);
 
 		// loaders
-		void loadTextureResource(std::string path);
-		void loadFontResource(std::string path);
-		void loadSoundResource(std::string path);
+		void loadTextureResource(std::string& path);
+		void loadFontResource(std::string& path);
+		void loadSoundResource(std::string& path);
 
 		// deleters
-		void purgeTextureResource(std::string id);
-		void purgeFontResource(std::string id);
-		void purgeSoundResource(std::string id);
+		void purgeTextureResource(std::string& id);
+		void purgeFontResource(std::string& id);
+		void purgeSoundResource(std::string& id);
 
 		// getters
 		const sf::Texture& getTextureResource(const std::string& id);
