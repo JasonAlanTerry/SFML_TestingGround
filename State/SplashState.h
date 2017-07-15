@@ -14,6 +14,7 @@ namespace State {
 	private:
 		Status currentStatus;
 		ResCodex::ResReq req;
+		int m_fade = 255;
 
 	public:
 

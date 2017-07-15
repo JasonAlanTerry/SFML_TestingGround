@@ -35,6 +35,7 @@ namespace State {
 		title.setString("Game Engine Test");
 
 		logo.setTexture(resManager.getTextureResource("tex_splsfml"));
+		logo.setColor(sf::Color(255, 255, 255, m_fade));
 		logo.scale(0.75f, 0.75f);
 		logo.setOrigin(logo.getTexture()->getSize().x/2, logo.getTexture()->getSize().y / 2);
 		logo.setPosition(1280 / 2, 720 / 2);
@@ -69,7 +70,7 @@ namespace State {
 	}
 
 	void SplashState::update(float dt) {
-
+			
 	}
 
 	std::string SplashState::stateInfo() {

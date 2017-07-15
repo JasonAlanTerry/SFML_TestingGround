@@ -36,7 +36,7 @@ namespace State {
 		virtual void kill()						= 0;
 
 		virtual void newScene(Scene s)			= 0;
-		virtual Scene activeScene()			= 0;
+		virtual Scene activeScene()				= 0;
 		virtual void killScene()				= 0;
 
 		virtual void input(const sf::Event& e)	= 0;
